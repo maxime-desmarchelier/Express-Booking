@@ -1,0 +1,30 @@
+{
+	"info": {
+		"_postman_id": "44294e94-2a9c-41fe-aff7-b9eeda525c11",
+		"name": "TrainBookingService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "369086"
+	},
+	"item": [
+		{
+			"name": "Rest API HelloWorld",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/tests/hello/toto",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"tests",
+						"hello",
+						"toto"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

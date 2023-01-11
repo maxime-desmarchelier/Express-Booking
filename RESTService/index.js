@@ -8,8 +8,8 @@ app.use('/tests', require('./routes/tests'));
 
 (async () => {
     try {
-        app.listen(3000);
-        console.log('Server started on port 3000');
+        app.listen(process.env.EXTERNAL_PORT);
+        console.log('Server started on port ' + process.env.EXTERNAL_PORT);
     } catch (error) {
         console.log(error);
     }

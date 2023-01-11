@@ -25,6 +25,26 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Rest API DB Connexion Test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/tests/db",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"tests",
+						"db"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

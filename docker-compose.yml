@@ -16,11 +16,11 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - EXTERNAL_PORT=3000
-      - PG_USER=postgres
-      - PG_PASSWORD=postgres
-      - PG_DATABASE=trainBookingService
-      - PG_HOST=postgres
+      EXTERNAL_PORT: 3000
+      PG_USER: postgres
+      PG_PASSWORD: postgres
+      PG_DATABASE: trainbookingservice
+      PG_HOST: postgres
     depends_on:
       - postgres
 

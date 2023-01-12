@@ -9,6 +9,12 @@ services:
       - '5432:5432'
     volumes:
       - trainBookingService-db:/var/lib/postgresql/data
+  soap-service:
+    container_name: soap-service
+    build:
+      context: SOAPService/.
+    ports:
+      - "8080:8080"
   rest-service:
     container_name: rest-service
     build:
@@ -23,6 +29,8 @@ services:
       PG_HOST: postgres
     depends_on:
       - postgres
+      - soap-service
+
 
 volumes:
   trainBookingService-db:

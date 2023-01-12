@@ -20,7 +20,7 @@ public class HelloWorldEndpoint {
     @ResponsePayload
     public GetHelloWorldResponse getHelloWorld(@RequestPayload GetHelloWorldRequest request) {
         GetHelloWorldResponse response = new GetHelloWorldResponse();
-        response.setHello("Hello " + request.getName());
+        response.setHello("HelloObject " + request.getName());
         return response;
     }
 }

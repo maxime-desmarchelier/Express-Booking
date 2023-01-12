@@ -12,15 +12,18 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 public class HelloWorldEndpoint {
     private static final String NAMESPACE_URI = "http://spring.io/guides/gs-producing-web-service";
 
+    ConsumingRestApplication consumingRestApplication;
+
     @Autowired
     public HelloWorldEndpoint() {
+        consumingRestApplication = new ConsumingRestApplication();
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getHelloWorldRequest")
     @ResponsePayload
     public GetHelloWorldResponse getHelloWorld(@RequestPayload GetHelloWorldRequest request) {
         GetHelloWorldResponse response = new GetHelloWorldResponse();
-        response.setHello("HelloObject " + request.getName());
+        response.setHello(consumingRestApplication.helloWorld(request.getName()));
         return response;
     }
 }

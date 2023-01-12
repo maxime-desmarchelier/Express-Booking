@@ -14,22 +14,15 @@ public class ConsumingRestApplication {
 
     private static final Logger log = LoggerFactory.getLogger(ConsumingRestApplication.class);
 
-    public static void main(String[] args) {
-        SpringApplication.run(ConsumingRestApplication.class, args);
-    }
-
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
         return builder.build();
     }
 
-    @Bean
-    public CommandLineRunner run(RestTemplate restTemplate) {
-        return args -> {
-            HelloObject hello = restTemplate.getForObject(
-                    "http://localhost:3000/tests/hello/toto", HelloObject.class);
-            assert hello != null;
-            log.info(hello.toString());
-        };
+    public String helloWorld(String name) {
+        HelloObject hello = new RestTemplate().getForObject(
+                "http://localhost:3000/tests/hello/" + name, HelloObject.class);
+        assert hello != null;
+        return hello.getHelloText();
     }
 }

@@ -1,4 +1,4 @@
-package com.SOAPService;
+package com.RESTService.Object;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

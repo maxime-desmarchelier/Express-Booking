@@ -1,7 +1,8 @@
-package com.SOAPService;
+package com.SOAPService.Endpoint;
 
-import io.spring.guides.gs_producing_web_service.GetHelloWorldRequest;
-import io.spring.guides.gs_producing_web_service.GetHelloWorldResponse;
+import com.RESTService.CompanyRESTApiConsumer;
+import https.trainbooking_fr.train_booking_soap_service.GetHelloWorldRequest;
+import https.trainbooking_fr.train_booking_soap_service.GetHelloWorldResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -10,13 +11,14 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 @Endpoint
 public class HelloWorldEndpoint {
-    private static final String NAMESPACE_URI = "http://spring.io/guides/gs-producing-web-service";
+    private static final String NAMESPACE_URI = "https://trainbooking.fr/train-booking-soap-service";
 
-    ConsumingRestApplication consumingRestApplication;
+    CompanyRESTApiConsumer consumingRestApplication;
 
     @Autowired
     public HelloWorldEndpoint() {
-        consumingRestApplication = new ConsumingRestApplication();
+        consumingRestApplication = new CompanyRESTApiConsumer();
+        consumingRestApplication.setUrl("http://localhost:3000/");
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getHelloWorldRequest")

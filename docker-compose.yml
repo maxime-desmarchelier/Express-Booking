@@ -1,20 +1,29 @@
 version: "0.1"
 services:
-  postgres:
+  trainbooking-db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: trainbooking
+    ports:
+      - "3306:3306"
+    volumes:
+      - trainbooking-db-volume:/var/lib/mysql
+  sncf-db:
     image: postgres
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: sncf
+      POSTGRES_PASSWORD: sncf
     ports:
       - '5432:5432'
     volumes:
-      - trainBookingService-db:/var/lib/postgresql/data
-#  soap-service:
-#    container_name: soap-service
-#    build:
-#      context: SOAPService/.
-#    ports:
-#      - "8080:8080"
+      - sncf-db-volume:/var/lib/postgresql/data
+  #  soap-service:
+  #    container_name: soap-service
+  #    build:
+  #      context: SOAPService/.
+  #    ports:
+  #      - "8080:8080"
   rest-service:
     container_name: rest-service
     build:
@@ -23,14 +32,15 @@ services:
       - "3000:3000"
     environment:
       EXTERNAL_PORT: 3000
-      PG_USER: postgres
-      PG_PASSWORD: postgres
-      PG_DATABASE: trainbookingservice
-      PG_HOST: postgres
+      PG_USER: sncf
+      PG_PASSWORD: sncf
+      PG_DATABASE: sncf
+      PG_HOST: sncf-db
     depends_on:
-      - postgres
+      - sncf-db
       #- soap-service
 
 
 volumes:
-  trainBookingService-db:
+  sncf-db-volume:
+  trainbooking-db-volume:

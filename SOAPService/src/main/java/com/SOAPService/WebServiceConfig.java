@@ -24,12 +24,22 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     }
 
     @Bean(name = "tests")
-    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema testsSchema) {
+    public DefaultWsdl11Definition testsWsdlDefinition(XsdSchema testsSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("TestsPort");
         wsdl11Definition.setLocationUri("/ws");
         wsdl11Definition.setTargetNamespace("https://trainbooking.fr/train-booking-soap-service");
         wsdl11Definition.setSchema(testsSchema);
+        return wsdl11Definition;
+    }
+
+    @Bean(name = "auth")
+    public DefaultWsdl11Definition authWsdlDefinition(XsdSchema authSchema) {
+        DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+        wsdl11Definition.setPortTypeName("AuthPort");
+        wsdl11Definition.setLocationUri("/ws");
+        wsdl11Definition.setTargetNamespace("https://trainbooking.fr/train-booking-soap-service");
+        wsdl11Definition.setSchema(authSchema);
         return wsdl11Definition;
     }
 

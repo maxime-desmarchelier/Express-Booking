@@ -85,6 +85,8 @@
                 <configuration>
                     <sources>
                         <source>${project.basedir}/src/main/resources/tests.xsd</source>
+                        <source>${project.basedir}/src/main/resources/auth.xsd</source>
+
                     </sources>
                 </configuration>
             </plugin>

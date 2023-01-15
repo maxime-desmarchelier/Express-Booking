@@ -1,26 +1,31 @@
 const Sequelize = require('sequelize');
-const db = require('../database');
+const sequelize = require('../database');
 
 // define the trains model
-const Trains = db.define('trains', {
+const Train = sequelize.define('train', {
     id: {
         type: Sequelize.INTEGER,
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
-    departure: {
+    id_train: {
         type: Sequelize.STRING,
         allowNull: false
     },
     arrival: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
+    },
+    departure: {
+        type: Sequelize.STRING,
+        allowNull: false
     },
     departure_datetime: {
         type: Sequelize.DATE,
         allowNull: false
-    }
+    },
 });
 
-module.exports = Trains;
+
+module.exports = Train;
+

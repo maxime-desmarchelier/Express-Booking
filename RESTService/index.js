@@ -14,14 +14,17 @@ app.use('/search', require('./routes/search'));
 
 // import the trains model
 const Trains = require('./models/trains');
+const Classes = require('./models/class');
+
 
 // start the server
 (async () => {
     try {
         // sync the database models
-        await sequelize.sync(
-            {force: false}
-        );
+        sequelize.sync({force: true}).then(() => {
+            console.log('Database synced');
+        });
+
         let port = 3000;
         if (process.env.EXTERNAL_PORT) {
             port = process.env.EXTERNAL_PORT;

@@ -47,4 +47,9 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     public XsdSchema testsSchema() {
         return new SimpleXsdSchema(new ClassPathResource("tests.xsd"));
     }
+
+    @Bean
+    public XsdSchema authSchema() {
+        return new SimpleXsdSchema(new ClassPathResource("auth.xsd"));
+    }
 }

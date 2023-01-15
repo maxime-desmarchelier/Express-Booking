@@ -1,5 +1,8 @@
 package com.SOAPService.Endpoint;
 
+import com.Database.AuthController;
+import https.trainbooking_fr.train_booking_soap_service.AuthCreateRequest;
+import https.trainbooking_fr.train_booking_soap_service.AuthCreateResponse;
 import https.trainbooking_fr.train_booking_soap_service.AuthRequest;
 import https.trainbooking_fr.train_booking_soap_service.AuthResponse;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -18,16 +21,28 @@ public class AuthEndpoint {
         String user = request.getUsername();
         String pass = request.getPassword();
 
-        //userController.insertNewUser(user, pass);
-
         AuthResponse response = new AuthResponse();
 
-        if (user.equals("admin") && pass.equals("admin")) {
-            response.setAuthToken("123456");
+        AuthController authController = new AuthController();
+        if (authController.userExists(user, pass)) {
+            response.setAuthToken("123456789");
         } else {
             response.setAuthToken("0");
         }
 
+        return response;
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "AuthCreateRequest")
+    @ResponsePayload
+    public AuthCreateResponse createUser(@RequestPayload AuthCreateRequest request) {
+        String user = request.getUsername();
+        String pass = request.getPassword();
+
+        AuthCreateResponse response = new AuthCreateResponse();
+
+        AuthController authController = new AuthController();
+        response.setSucceed(authController.createUser(user, pass));
 
         return response;
     }

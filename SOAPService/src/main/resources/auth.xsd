@@ -35,4 +35,20 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="CheckTokenValidityRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="CheckTokenValidityResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="succeed" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
 </xs:schema>

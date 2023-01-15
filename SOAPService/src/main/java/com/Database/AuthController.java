@@ -61,4 +61,34 @@ public class AuthController {
             throw new RuntimeException(e);
         }
     }
+
+    public String getToken(String subject) {
+        try {
+            db.connect();
+            String query = "SELECT token FROM users WHERE username = ?";
+            PreparedStatement statement = db.getConnection().prepareStatement(query);
+            statement.setString(1, subject);
+            ResultSet rs = statement.executeQuery();
+            String token = rs.next() ? rs.getString("token") : null;
+            db.closeConnection();
+            return token;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void saveToken(String user, String jwtToken) {
+        try {
+            db.connect();
+            String query = "UPDATE users SET token = ? WHERE username = ?";
+            PreparedStatement statement = db.getConnection().prepareStatement(query);
+            statement.setString(1, jwtToken);
+            statement.setString(2, user);
+            statement.executeUpdate();
+            db.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

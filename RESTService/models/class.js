@@ -11,6 +11,8 @@ const Cls = sequelize.define('class', {
         type: Sequelize.INTEGER,
         allowNull: false
     }
+}, {
+    timestamps: false
 });
 
 Train.hasMany(Cls);

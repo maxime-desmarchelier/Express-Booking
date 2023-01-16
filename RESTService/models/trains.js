@@ -24,6 +24,8 @@ const Train = sequelize.define('train', {
         type: Sequelize.DATE,
         allowNull: false
     },
+}, {
+    timestamps: false
 });
 
 

@@ -1,7 +1,7 @@
 const sequelize = require('./database');
 const Train = require('./models/trains');
 const cls = require('./models/class');
-const Ticket = require('./models/ticket_type');
+const Ticket = require('./models/ticket');
 
 const hoaxer = require('hoaxer');
 

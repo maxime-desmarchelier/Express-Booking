@@ -17,6 +17,8 @@ const Ticket = sequelize.define('ticket', {
         type: Sequelize.FLOAT,
         allowNull: false
     }
+}, {
+    timestamps: false
 });
 
 Cls.hasMany(Ticket);

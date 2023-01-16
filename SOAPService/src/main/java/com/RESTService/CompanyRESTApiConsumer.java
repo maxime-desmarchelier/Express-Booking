@@ -23,6 +23,11 @@ public class CompanyRESTApiConsumer {
         return hello.getHelloText();
     }
 
+    public String searchTrain(String from, String to) {
+        return new RestTemplate().getForObject(
+                url + "search/train/FROM/" + from + "/TO/" + to, String.class);
+    }
+
     public void setUrl(String url) {
         this.url = url;
     }

@@ -43,6 +43,16 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         return wsdl11Definition;
     }
 
+    @Bean(name = "train")
+    public DefaultWsdl11Definition searchWsdlDefinition(XsdSchema trainSchema) {
+        DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+        wsdl11Definition.setPortTypeName("TrainPort");
+        wsdl11Definition.setLocationUri("/ws");
+        wsdl11Definition.setTargetNamespace("https://trainbooking.fr/train-booking-soap-service");
+        wsdl11Definition.setSchema(trainSchema);
+        return wsdl11Definition;
+    }
+
     @Bean
     public XsdSchema testsSchema() {
         return new SimpleXsdSchema(new ClassPathResource("tests.xsd"));
@@ -52,4 +62,10 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     public XsdSchema authSchema() {
         return new SimpleXsdSchema(new ClassPathResource("auth.xsd"));
     }
+
+    @Bean
+    public XsdSchema trainSchema() {
+        return new SimpleXsdSchema(new ClassPathResource("train.xsd"));
+    }
+
 }

@@ -11,6 +11,8 @@ app.use(express.urlencoded({extended: true}));
 // mount the routes for tests and search
 app.use('/tests', require('./routes/tests'));
 app.use('/search', require('./routes/search'));
+app.use('/booking', require('./routes/booking'));
+
 
 // import the trains model
 const Trains = require('./models/trains');

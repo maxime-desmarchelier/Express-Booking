@@ -26,10 +26,8 @@ public class SearchEndpoint {
     @ResponsePayload
     public SearchResponse search(@RequestPayload SearchRequest request) {
 
-        String from = request.getFrom();
-        String to = request.getTo();
+        String jsonData = consumingRestApplication.searchTrain(request);
 
-        String jsonData = consumingRestApplication.searchTrain(from, to);
         SearchResponse.Train[] trains = new Gson().fromJson(jsonData, SearchResponse.Train[].class);
         SearchResponse searchResponse = new SearchResponse();
         searchResponse.getTrain().addAll(Arrays.asList(trains));

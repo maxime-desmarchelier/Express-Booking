@@ -1,6 +1,7 @@
 package com.RESTService;
 
 import com.RESTService.Object.HelloObject;
+import https.trainbooking_fr.train_booking_soap_service.SearchRequest;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -22,14 +23,24 @@ public class CompanyRESTApiConsumer {
         return hello.getHelloText();
     }
 
-    public String searchTrain(String from, String to) {
+    public String searchTrain(SearchRequest request) {
         String requestUrl = url + "search/train/";
-        if (from != null && !from.isEmpty()) {
-            requestUrl += "FROM/" + from + "/";
+        if (request.getFrom() != null && !request.getFrom().isEmpty()) {
+            requestUrl += "FROM/" + request.getFrom() + "/";
+            if (request.getTo() != null && !request.getTo().isEmpty()) {
+                requestUrl += "TO/" + request.getTo() + "/";
+                if (request.getDate() != null && !request.getDate().isEmpty()) {
+                    requestUrl += "DATE/" + request.getDate() + "/";
+                    if (request.getClazz() != null && !request.getClazz().isEmpty()) {
+                        requestUrl += "CLASS/" + request.getClazz() + "/";
+                        if (request.getMinseats() != -1) {
+                            requestUrl += "MINSEATS/" + request.getMinseats() + "/";
+                        }
+                    }
+                }
+            }
         }
-        if (to != null && !to.isEmpty()) {
-            requestUrl += "TO/" + to + "/";
-        }
+
 
         return new RestTemplate().getForObject(requestUrl, String.class);
     }

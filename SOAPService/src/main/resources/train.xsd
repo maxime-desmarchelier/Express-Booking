@@ -6,6 +6,9 @@
             <xs:sequence>
                 <xs:element name="from" type="xs:string"/>
                 <xs:element name="to" type="xs:string"/>
+                <xs:element name="date" type="xs:string"/>
+                <xs:element name="class" type="xs:string"/>
+                <xs:element name="minseats" type="xs:int" default="-1"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -17,16 +20,16 @@
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="id" type="xs:unsignedByte"/>
-                            <xs:element name="id_train" type="xs:string"/>
+                            <xs:element name="idTrain" type="xs:string"/>
                             <xs:element name="arrival" type="xs:string"/>
                             <xs:element name="departure" type="xs:string"/>
-                            <xs:element name="departure_datetime" type="xs:dateTime"/>
+                            <xs:element name="departureDatetime" type="xs:string"/>
                             <xs:element maxOccurs="unbounded" name="classes">
                                 <xs:complexType>
                                     <xs:sequence>
                                         <xs:element name="id" type="xs:unsignedByte"/>
                                         <xs:element name="name" type="xs:string"/>
-                                        <xs:element name="available_seats" type="xs:unsignedByte"/>
+                                        <xs:element name="availableSeats" type="xs:unsignedByte"/>
                                         <xs:element name="trainId" type="xs:unsignedByte"/>
                                         <xs:element maxOccurs="unbounded" name="tickets">
                                             <xs:complexType>

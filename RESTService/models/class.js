@@ -7,7 +7,7 @@ const Cls = sequelize.define('class', {
     name: {
         type: Sequelize.ENUM('First', 'Standard', 'Business')
     },
-    available_seats: {
+    availableSeats: {
         type: Sequelize.INTEGER,
         allowNull: false
     }

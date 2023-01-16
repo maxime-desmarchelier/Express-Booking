@@ -11,13 +11,13 @@ exports.updateSeats = async (req, res) => {
     }
     Trains.findOne({
         where: {
-            id_train: req.params.id
+            idTrain: req.params.id
         }, include: [{
             model: Classes,
             as: 'classes',
             where: {
                 name: req.params.class,
-                available_seats: {
+                availableSeats: {
                     [Op.gte]: req.params.seats
                 }
             }
@@ -25,7 +25,7 @@ exports.updateSeats = async (req, res) => {
     }).then(train => {
         if (train) {
             Classes.update({
-                available_seats: Sequelize.literal(`available_seats - ${req.params.seats}`)
+                availableSeats: Sequelize.literal(`availableSeats - ${req.params.seats}`)
             }, {
                 where: {
                     name: req.params.class,

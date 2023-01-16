@@ -19,7 +19,7 @@ function makeid(length) {
 const generateRandomClass = (cls) => {
     return {
         name: cls,
-        available_seats: hoaxer.random.number({min: 2, max: 15}),
+        availableSeats: hoaxer.random.number({min: 2, max: 15}),
         price: hoaxer.random.number({min: 30, max: 200})
     }
 }
@@ -35,8 +35,8 @@ for (let i = 0; i < 10; i++) {
     Train.create({
         arrival: arrival,
         departure: departure,
-        departure_datetime: hoaxer.date.between('2023-01-15', '2023-01-25'),
-        id_train: makeid(5)
+        departureDatetime: hoaxer.date.between('2023-01-15', '2023-01-25'),
+        idTrain: makeid(5)
     }).then(train => {
         // Create 3 classes for each train
         for (let j = 0; j < 3; j++) {

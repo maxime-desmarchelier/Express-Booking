@@ -24,9 +24,9 @@ const Ticket = require('./models/ticket');
 (async () => {
     try {
         // sync the database models
-        /*sequelize.sync({force: true}).then(() => {
+        sequelize.sync({force: true}).then(() => {
             console.log('Database synced');
-        });*/
+        });
 
         let port = 3000;
         if (process.env.EXTERNAL_PORT) {

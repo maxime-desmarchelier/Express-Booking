@@ -8,7 +8,7 @@ const Train = sequelize.define('train', {
         primaryKey: true,
         autoIncrement: true
     },
-    id_train: {
+    idTrain: {
         type: Sequelize.STRING,
         allowNull: false
     },
@@ -20,7 +20,7 @@ const Train = sequelize.define('train', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    departure_datetime: {
+    departureDatetime: {
         type: Sequelize.DATE,
         allowNull: false
     },

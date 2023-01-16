@@ -10,7 +10,7 @@ exports.getAll = async (req, res) => {
         const trains = await Trains.findAll({
             include: [{
                 model: Classes, where: {
-                    available_seats: {
+                    availableSeats: {
                         [Op.gt]: 0
                     }
                 }, include: {model: Ticket}
@@ -33,7 +33,7 @@ exports.getAllFrom = async (req, res) => {
                 departure: req.params.from
             }, include: [{
                 model: Classes, where: {
-                    available_seats: {
+                    availableSeats: {
                         [Op.gt]: 0
                     }
                 }, include: {model: Ticket}
@@ -56,7 +56,7 @@ exports.getAllFromTo = async (req, res) => {
                 departure: req.params.from, arrival: req.params.to
             }, include: [{
                 model: Classes, where: {
-                    available_seats: {
+                    availableSeats: {
                         [Op.gt]: 0
                     }
                 }, include: {model: Ticket}
@@ -76,12 +76,12 @@ exports.getAllFromToOnDate = async (req, res) => {
         // Find all trains from a specific station to another specific station on a specific date
         const trains = await Trains.findAll({
             where: {
-                departure: req.params.from, arrival: req.params.to, departure_datetime: {
+                departure: req.params.from, arrival: req.params.to, departureDatetime: {
                     [Op.between]: [req.params.date + ' 00:00:00', req.params.date + ' 23:59:59']
                 }
             }, include: [{
                 model: Classes, where: {
-                    available_seats: {
+                    availableSeats: {
                         [Op.gt]: 0
                     }
                 }, include: {model: Ticket}
@@ -101,12 +101,12 @@ exports.getAllFromToOnDateClass = async (req, res) => {
         // Find all trains from a specific station to another specific station on a specific date in a specific class
         const trains = await Trains.findAll({
             where: {
-                departure: req.params.from, arrival: req.params.to, departure_datetime: {
+                departure: req.params.from, arrival: req.params.to, departureDatetime: {
                     [Op.between]: [req.params.date + ' 00:00:00', req.params.date + ' 23:59:59']
                 }
             }, include: [{
                 model: Classes, where: {
-                    name: req.params.class, available_seats: {
+                    name: req.params.class, availableSeats: {
                         [Op.gt]: 0
                     }
                 }, include: {model: Ticket}
@@ -126,12 +126,12 @@ exports.getAllFromToOnDateClassMinSeats = async (req, res) => {
         // Find all trains from a specific station to another specific station on a specific date in a specific class with a minimum number of seats
         const trains = await Trains.findAll({
             where: {
-                departure: req.params.from, arrival: req.params.to, departure_datetime: {
+                departure: req.params.from, arrival: req.params.to, departureDatetime: {
                     [Op.between]: [req.params.date + ' 00:00:00', req.params.date + ' 23:59:59']
                 }
             }, include: [{
                 model: Classes, where: {
-                    name: req.params.class, available_seats: {
+                    name: req.params.class, availableSeats: {
                         [Op.gte]: req.params.nbseats
                     }
                 }, include: {model: Ticket}

@@ -22,7 +22,13 @@ exports.getAllFrom = async (req, res) => {
         const trains = await Trains.findAll({
             where: {
                 departure: req.params.from
-            }, include: {all: true, nested: true}
+            }, include: [{
+                model: Classes, where: {
+                    available_seats: {
+                        [Op.gt]: 0
+                    }
+                }, include: {all: true, nested: true}
+            }]
         });
         return res.status(200).json(trains);
     } catch (error) {
@@ -39,7 +45,13 @@ exports.getAllFromTo = async (req, res) => {
         const trains = await Trains.findAll({
             where: {
                 departure: req.params.from, arrival: req.params.to
-            }, include: {all: true, nested: true}
+            }, include: [{
+                model: Classes, where: {
+                    available_seats: {
+                        [Op.gt]: 0
+                    }
+                }, include: {all: true, nested: true}
+            }]
         });
         return res.status(200).json(trains);
     } catch (error) {
@@ -58,7 +70,13 @@ exports.getAllFromToOnDate = async (req, res) => {
                 departure: req.params.from, arrival: req.params.to, departure_datetime: {
                     [Op.between]: [req.params.date + ' 00:00:00', req.params.date + ' 23:59:59']
                 }
-            }, include: {all: true, nested: true}
+            }, include: [{
+                model: Classes, where: {
+                    available_seats: {
+                        [Op.gt]: 0
+                    }
+                }, include: {all: true, nested: true}
+            }]
         });
         return res.status(200).json(trains);
     } catch (error) {

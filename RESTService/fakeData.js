@@ -1,6 +1,8 @@
 const sequelize = require('./database');
 const Train = require('./models/trains');
 const cls = require('./models/class');
+const Ticket = require('./models/ticket_type');
+
 const hoaxer = require('hoaxer');
 
 function makeid(length) {
@@ -21,6 +23,7 @@ const generateRandomClass = (cls) => {
         price: hoaxer.random.number({min: 30, max: 200})
     }
 }
+
 // Use a loop to create 10 trains
 for (let i = 0; i < 10; i++) {
     let departure;
@@ -39,6 +42,13 @@ for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 3; j++) {
             let arrcls = ['First', 'Standard', 'Business'];
             cls.create(generateRandomClass(arrcls[j])).then(ts => {
+                let arrticket = ['flexible', 'non_flexible'];
+                let price = hoaxer.random.number({min: 30, max: 200});
+                for (let k = 0; k < 2; k++) {
+                    Ticket.create({type: arrticket[k], price: price + k * 15}).then(tkt => {
+                        ts.addTicket(tkt);
+                    });
+                }
                 train.addClass(ts);
             });
         }

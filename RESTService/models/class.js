@@ -10,10 +10,6 @@ const Cls = sequelize.define('class', {
     remaining_seats: {
         type: Sequelize.INTEGER,
         allowNull: false
-    },
-    price: {
-        type: Sequelize.FLOAT,
-        allowNull: false
     }
 });
 

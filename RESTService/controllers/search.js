@@ -6,7 +6,7 @@ const {Op} = require("sequelize");
 exports.getAll = async (req, res) => {
     try {
         // get all trains from the database
-        const trains = await Trains.findAll({include: ['classes']});
+        const trains = await Trains.findAll({include: ['classes', 'ticket']});
         return res.status(200).json(trains);
     } catch (error) {
         console.error(error);
@@ -22,7 +22,7 @@ exports.getAllFrom = async (req, res) => {
         const trains = await Trains.findAll({
             where: {
                 departure: req.params.from
-            }, include: ['classes']
+            }, include: ['classes', 'ticket']
         });
         return res.status(200).json(trains);
     } catch (error) {
@@ -35,12 +35,11 @@ exports.getAllFrom = async (req, res) => {
 // exports function to get all trains from a specific station to another specific station
 exports.getAllFromTo = async (req, res) => {
     try {
-        // Find all trains from a specific station to another specific station
+        // Find all trains from a specific station to another specific station include classes and ticket
         const trains = await Trains.findAll({
             where: {
-                departure: req.params.from,
-                arrival: req.params.to
-            }, include: ['classes']
+                departure: req.params.from, arrival: req.params.to
+            }, include: {all: true, nested: true}
         });
         return res.status(200).json(trains);
     } catch (error) {
@@ -56,12 +55,10 @@ exports.getAllFromToOnDate = async (req, res) => {
         // Find all trains from a specific station to another specific station on a specific date
         const trains = await Trains.findAll({
             where: {
-                departure: req.params.from,
-                arrival: req.params.to,
-                departure_datetime: {
+                departure: req.params.from, arrival: req.params.to, departure_datetime: {
                     [Op.between]: [req.params.date + ' 00:00:00', req.params.date + ' 23:59:59']
                 }
-            }, include: ['classes']
+            }, include: {all: true, nested: true}
         });
         return res.status(200).json(trains);
     } catch (error) {
@@ -77,19 +74,15 @@ exports.getAllFromToOnDateClass = async (req, res) => {
         // Find all trains from a specific station to another specific station on a specific date in a specific class
         const trains = await Trains.findAll({
             where: {
-                departure: req.params.from,
-                arrival: req.params.to,
-                departure_datetime: {
+                departure: req.params.from, arrival: req.params.to, departure_datetime: {
                     [Op.between]: [req.params.date + ' 00:00:00', req.params.date + ' 23:59:59']
                 }
             }, include: [{
-                model: Classes,
-                where: {
-                    name: req.params.class,
-                    remaining_seats: {
+                model: Classes, where: {
+                    name: req.params.class, remaining_seats: {
                         [Op.gt]: 0
                     }
-                }
+                }, include: {all: true, nested: true}
             }]
         });
         return res.status(200).json(trains);
@@ -106,19 +99,15 @@ exports.getAllFromToOnDateClassMinSeats = async (req, res) => {
         // Find all trains from a specific station to another specific station on a specific date in a specific class with a minimum number of seats
         const trains = await Trains.findAll({
             where: {
-                departure: req.params.from,
-                arrival: req.params.to,
-                departure_datetime: {
+                departure: req.params.from, arrival: req.params.to, departure_datetime: {
                     [Op.between]: [req.params.date + ' 00:00:00', req.params.date + ' 23:59:59']
                 }
             }, include: [{
-                model: Classes,
-                where: {
-                    name: req.params.class,
-                    remaining_seats: {
+                model: Classes, where: {
+                    name: req.params.class, remaining_seats: {
                         [Op.gte]: req.params.nbseats
                     }
-                }
+                }, include: {all: true, nested: true}
             }]
         });
         return res.status(200).json(trains);

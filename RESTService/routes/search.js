@@ -8,5 +8,4 @@ router.get('/train/FROM/:from/TO/:to/ON/:date', controller.getAllFromToOnDate);
 router.get('/train/FROM/:from/TO/:to/ON/:date/CLASS/:class', controller.getAllFromToOnDateClass);
 router.get('/train/FROM/:from/TO/:to/ON/:date/CLASS/:class/MINSEATS/:nbseats', controller.getAllFromToOnDateClassMinSeats);
 
-
 module.exports = router;

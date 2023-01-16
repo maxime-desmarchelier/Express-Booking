@@ -15,6 +15,7 @@ app.use('/search', require('./routes/search'));
 // import the trains model
 const Trains = require('./models/trains');
 const Classes = require('./models/class');
+const Ticket = require('./models/ticket_type');
 
 
 // start the server

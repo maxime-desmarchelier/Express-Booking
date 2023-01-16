@@ -19,7 +19,7 @@ function makeid(length) {
 const generateRandomClass = (cls) => {
     return {
         name: cls,
-        remaining_seats: hoaxer.random.number({min: 2, max: 15}),
+        available_seats: hoaxer.random.number({min: 2, max: 15}),
         price: hoaxer.random.number({min: 30, max: 200})
     }
 }

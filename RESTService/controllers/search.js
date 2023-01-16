@@ -22,7 +22,7 @@ exports.getAllFrom = async (req, res) => {
         const trains = await Trains.findAll({
             where: {
                 departure: req.params.from
-            }, include: ['classes', 'ticket']
+            }, include: {all: true, nested: true}
         });
         return res.status(200).json(trains);
     } catch (error) {
@@ -79,7 +79,7 @@ exports.getAllFromToOnDateClass = async (req, res) => {
                 }
             }, include: [{
                 model: Classes, where: {
-                    name: req.params.class, remaining_seats: {
+                    name: req.params.class, available_seats: {
                         [Op.gt]: 0
                     }
                 }, include: {all: true, nested: true}
@@ -104,7 +104,7 @@ exports.getAllFromToOnDateClassMinSeats = async (req, res) => {
                 }
             }, include: [{
                 model: Classes, where: {
-                    name: req.params.class, remaining_seats: {
+                    name: req.params.class, available_seats: {
                         [Op.gte]: req.params.nbseats
                     }
                 }, include: {all: true, nested: true}

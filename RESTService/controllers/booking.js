@@ -1,9 +1,14 @@
 const Trains = require("../models/trains");
 const Classes = require("../models/class");
 const Sequelize = require('sequelize');
+const {Op} = require("sequelize");
 
 
 exports.updateSeats = async (req, res) => {
+    if (!(['Standard', 'First', 'Business'].includes(req.params.class))) {
+        res.status(404).send('Unknown class');
+        return;
+    }
     Trains.findOne({
         where: {
             id_train: req.params.id
@@ -11,7 +16,10 @@ exports.updateSeats = async (req, res) => {
             model: Classes,
             as: 'classes',
             where: {
-                name: req.params.class
+                name: req.params.class,
+                available_seats: {
+                    [Op.gte]: req.params.seats
+                }
             }
         }]
     }).then(train => {
@@ -27,7 +35,7 @@ exports.updateSeats = async (req, res) => {
                 res.status(200).send('Update successful');
             });
         } else {
-            res.status(404).send('Train not found');
+            res.status(404).send('Train not found or not enough available seats');
         }
     }).catch(err => {
         console.log(err);

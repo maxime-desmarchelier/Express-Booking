@@ -6,7 +6,15 @@ const {Op} = require("sequelize");
 exports.getAll = async (req, res) => {
     try {
         // get all trains from the database
-        const trains = await Trains.findAll({include: ['classes', 'ticket']});
+        const trains = await Trains.findAll({
+            include: [{
+                model: Classes, where: {
+                    available_seats: {
+                        [Op.gt]: 0
+                    }
+                }, include: {all: true, nested: true}
+            }]
+        });
         return res.status(200).json(trains);
     } catch (error) {
         console.error(error);

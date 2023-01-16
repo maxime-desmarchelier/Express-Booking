@@ -17,15 +17,21 @@ public class CompanyRESTApiConsumer {
     }
 
     public String helloWorld(String name) {
-        HelloObject hello = new RestTemplate().getForObject(
-                url + "tests/hello/" + name, HelloObject.class);
+        HelloObject hello = new RestTemplate().getForObject(url + "tests/hello/" + name, HelloObject.class);
         assert hello != null;
         return hello.getHelloText();
     }
 
     public String searchTrain(String from, String to) {
-        return new RestTemplate().getForObject(
-                url + "search/train/FROM/" + from + "/TO/" + to, String.class);
+        String requestUrl = url + "search/train/";
+        if (from != null && !from.isEmpty()) {
+            requestUrl += "FROM/" + from + "/";
+        }
+        if (to != null && !to.isEmpty()) {
+            requestUrl += "TO/" + to + "/";
+        }
+
+        return new RestTemplate().getForObject(requestUrl, String.class);
     }
 
     public void setUrl(String url) {

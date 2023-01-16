@@ -13,8 +13,40 @@
     <xs:element name="SearchResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="trainList" type="xs:string"/>
+                <xs:element name="train" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="id" type="xs:unsignedByte"/>
+                            <xs:element name="id_train" type="xs:string"/>
+                            <xs:element name="arrival" type="xs:string"/>
+                            <xs:element name="departure" type="xs:string"/>
+                            <xs:element name="departure_datetime" type="xs:dateTime"/>
+                            <xs:element maxOccurs="unbounded" name="classes">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="id" type="xs:unsignedByte"/>
+                                        <xs:element name="name" type="xs:string"/>
+                                        <xs:element name="available_seats" type="xs:unsignedByte"/>
+                                        <xs:element name="trainId" type="xs:unsignedByte"/>
+                                        <xs:element maxOccurs="unbounded" name="tickets">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="id" type="xs:unsignedByte"/>
+                                                    <xs:element name="type" type="xs:string"/>
+                                                    <xs:element name="price" type="xs:unsignedByte"/>
+                                                    <xs:element name="classId" type="xs:unsignedByte"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+
+
 </xs:schema>

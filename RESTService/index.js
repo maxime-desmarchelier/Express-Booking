@@ -17,16 +17,16 @@ app.use('/booking', require('./routes/booking'));
 // import the trains model
 const Trains = require('./models/trains');
 const Classes = require('./models/class');
-const Ticket = require('./models/ticket_type');
+const Ticket = require('./models/ticket');
 
 
 // start the server
 (async () => {
     try {
         // sync the database models
-        sequelize.sync({force: true}).then(() => {
+        /*sequelize.sync({force: true}).then(() => {
             console.log('Database synced');
-        });
+        });*/
 
         let port = 3000;
         if (process.env.EXTERNAL_PORT) {

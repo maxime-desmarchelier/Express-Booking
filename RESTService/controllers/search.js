@@ -1,5 +1,6 @@
 const Trains = require("../models/trains");
 const Classes = require("../models/class");
+const Ticket = require("../models/ticket");
 const {Op} = require("sequelize");
 
 // exports function to get all trains
@@ -12,7 +13,7 @@ exports.getAll = async (req, res) => {
                     available_seats: {
                         [Op.gt]: 0
                     }
-                }, include: {all: true, nested: true}
+                }, include: {model: Ticket}
             }]
         });
         return res.status(200).json(trains);
@@ -35,7 +36,7 @@ exports.getAllFrom = async (req, res) => {
                     available_seats: {
                         [Op.gt]: 0
                     }
-                }, include: {all: true, nested: true}
+                }, include: {model: Ticket}
             }]
         });
         return res.status(200).json(trains);
@@ -58,7 +59,7 @@ exports.getAllFromTo = async (req, res) => {
                     available_seats: {
                         [Op.gt]: 0
                     }
-                }, include: {all: true, nested: true}
+                }, include: {model: Ticket}
             }]
         });
         return res.status(200).json(trains);
@@ -83,7 +84,7 @@ exports.getAllFromToOnDate = async (req, res) => {
                     available_seats: {
                         [Op.gt]: 0
                     }
-                }, include: {all: true, nested: true}
+                }, include: {model: Ticket}
             }]
         });
         return res.status(200).json(trains);
@@ -108,7 +109,7 @@ exports.getAllFromToOnDateClass = async (req, res) => {
                     name: req.params.class, available_seats: {
                         [Op.gt]: 0
                     }
-                }, include: {all: true, nested: true}
+                }, include: {model: Ticket}
             }]
         });
         return res.status(200).json(trains);
@@ -133,7 +134,7 @@ exports.getAllFromToOnDateClassMinSeats = async (req, res) => {
                     name: req.params.class, available_seats: {
                         [Op.gte]: req.params.nbseats
                     }
-                }, include: {all: true, nested: true}
+                }, include: {model: Ticket}
             }]
         });
         return res.status(200).json(trains);

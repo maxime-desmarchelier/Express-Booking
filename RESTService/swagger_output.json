@@ -11,7 +11,7 @@
     "http"
   ],
   "paths": {
-    "/{id}/CLASS/{class}/SEATS/{seats}": {
+    "/booking/{id}/CLASS/{class}/SEATS/{seats}": {
       "put": {
         "description": "",
         "parameters": [
@@ -50,7 +50,7 @@
         }
       }
     },
-    "/train": {
+    "/search/train": {
       "get": {
         "description": "",
         "parameters": [],
@@ -64,7 +64,7 @@
         }
       }
     },
-    "/train/FROM/{from}": {
+    "/search/train/FROM/{from}": {
       "get": {
         "description": "",
         "parameters": [
@@ -85,7 +85,7 @@
         }
       }
     },
-    "/train/FROM/{from}/TO/{to}": {
+    "/search/train/FROM/{from}/TO/{to}": {
       "get": {
         "description": "",
         "parameters": [
@@ -112,7 +112,7 @@
         }
       }
     },
-    "/train/FROM/{from}/TO/{to}/ON/{date}": {
+    "/search/train/FROM/{from}/TO/{to}/ON/{date}": {
       "get": {
         "description": "",
         "parameters": [
@@ -145,7 +145,7 @@
         }
       }
     },
-    "/train/FROM/{from}/TO/{to}/ON/{date}/CLASS/{class}": {
+    "/search/train/FROM/{from}/TO/{to}/ON/{date}/CLASS/{class}": {
       "get": {
         "description": "",
         "parameters": [
@@ -184,7 +184,7 @@
         }
       }
     },
-    "/train/FROM/{from}/TO/{to}/ON/{date}/CLASS/{class}/MINSEATS/{nbseats}": {
+    "/search/train/FROM/{from}/TO/{to}/ON/{date}/CLASS/{class}/MINSEATS/{nbseats}": {
       "get": {
         "description": "",
         "parameters": [
@@ -229,7 +229,7 @@
         }
       }
     },
-    "/hello/{name}": {
+    "/tests/hello/{name}": {
       "get": {
         "description": "",
         "parameters": [
@@ -247,7 +247,7 @@
         }
       }
     },
-    "/db": {
+    "/tests/db": {
       "get": {
         "description": "",
         "parameters": [],

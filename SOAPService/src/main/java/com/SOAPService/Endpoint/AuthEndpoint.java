@@ -25,10 +25,7 @@ public class AuthEndpoint {
             byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary("XN}Ga@!E?4FQ(Em\"c4NzZ32a<|O<fMXN}Ga@!E?4FQ(Em\"c4NzZ32a<|O<fMXN}Ga@!E?4FQ(Em\"c4NzZ32a<|O<fM");
             SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
             Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
-            Claims claims = Jwts.parserBuilder()
-                    .setSigningKey(signingKey)
-                    .build()
-                    .parseClaimsJws(token).getBody();
+            Claims claims = Jwts.parserBuilder().setSigningKey(signingKey).build().parseClaimsJws(token).getBody();
 
             if (claims.getExpiration().before(new Date())) {
                 return false;
@@ -61,11 +58,7 @@ public class AuthEndpoint {
         if (authController.userExists(user, pass)) {
             long expiresIn = 2 * 60 * 60 * 1000; // 2 hours
             Date expiresAt = new Date(System.currentTimeMillis() + expiresIn);
-            String jwtToken = Jwts.builder()
-                    .setSubject(user)
-                    .setExpiration(expiresAt)
-                    .signWith(signingKey)
-                    .compact();
+            String jwtToken = Jwts.builder().setSubject(user).setExpiration(expiresAt).signWith(signingKey).compact();
             // save token in database
             authController.saveToken(user, jwtToken);
             response.setAuthToken(jwtToken);
@@ -81,11 +74,18 @@ public class AuthEndpoint {
     public AuthCreateResponse createUser(@RequestPayload AuthCreateRequest request) {
         String user = request.getUsername();
         String pass = request.getPassword();
+        String token = request.getToken();
+
+        boolean success = false;
 
         AuthCreateResponse response = new AuthCreateResponse();
-
         AuthController authController = new AuthController();
-        response.setSucceed(authController.createUser(user, pass));
+
+        if (checkTokenValidity(token)) {
+            success = authController.createUser(user, pass);
+        }
+
+        response.setSucceed(success);
 
         return response;
     }

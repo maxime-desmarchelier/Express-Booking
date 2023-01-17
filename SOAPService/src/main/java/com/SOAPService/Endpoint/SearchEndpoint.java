@@ -25,7 +25,6 @@ public class SearchEndpoint {
     @ResponsePayload
     public SearchResponse search(@RequestPayload SearchRequest request) {
 
-        // TODO : Check Token
         String jsonData = consumingRestApplication.searchTrain(request);
 
         SearchResponse.Train[] trains = new Gson().fromJson(jsonData, SearchResponse.Train[].class);

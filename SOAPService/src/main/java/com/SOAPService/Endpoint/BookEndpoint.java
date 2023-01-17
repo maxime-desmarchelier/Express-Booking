@@ -28,14 +28,16 @@ public class BookEndpoint {
         String token = request.getToken();
         int NBSeats = request.getNBSeats();
 
+        boolean success = false;
+
+        if (AuthEndpoint.checkTokenValidity(token)) {
+            BookingController bookController = new BookingController();
+            bookController.createReservation(idTrain, clazz, NBSeats, 0, token);
+            consumingRestApplication.bookTrain(request);
+            success = true;
+        }
         BookTicketResponse response = new BookTicketResponse();
-        BookingController bookController = new BookingController();
-
-        bookController.createReservation(idTrain, clazz, NBSeats, 0, token);
-
-        consumingRestApplication.bookTrain(request);
-
-        response.setSucceed(true);
+        response.setSucceed(success);
 
         return response;
     }

@@ -31,11 +31,11 @@ exports.updateSeats = async (req, res) => {
                     classe.save();
                     res.status(200).send('Seats updated');
                 } else {
-                    res.status(404).send('Class not found');
+                    res.status(400).send('Class not found');
                 }
             });
         } else {
-            res.status(404).send('Train not found or not enough available seats');
+            res.status(400).send('Train not found or not enough available seats');
         }
     }).catch(err => {
         console.log(err);

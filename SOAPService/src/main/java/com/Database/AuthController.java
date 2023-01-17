@@ -17,8 +17,6 @@ public class AuthController {
 
     public boolean createUser(String username, String password) {
         try {
-            //Connect to the database
-            db.connect();
             //Hash the password
             String hashedPassword = hashPassword(password);
             //Create the query
@@ -29,8 +27,6 @@ public class AuthController {
             statement.setString(2, hashedPassword);
             //Execute the update
             statement.executeUpdate();
-            //Close the connection
-            db.closeConnection();
             //Return true if the user was created
             return true;
         } catch (SQLException e) {
@@ -40,10 +36,9 @@ public class AuthController {
         }
     }
 
+
     public boolean userExists(String username, String password) {
         try {
-            //Connect to the database
-            db.connect();
             //Create the query
             String query = "SELECT username, password FROM users WHERE username = ?";
             //Create a prepared statement with the query
@@ -54,11 +49,8 @@ public class AuthController {
             //Hash the given password
             String hashedPassword = hashPassword(password);
             //Check if the result set has a next value and if the password matches the hashed password in the database
-            boolean exists = rs.next() && rs.getString("password").equals(hashedPassword);
-            //Close the connection
-            db.closeConnection();
             //Return if the user exists
-            return exists;
+            return rs.next() && rs.getString("password").equals(hashedPassword);
         } catch (SQLException e) {
             //Print the stack trace and return false if there was an exception
             e.printStackTrace();
@@ -91,8 +83,6 @@ public class AuthController {
     //Method to get a token from the database for a given user
     public String getToken(String subject) {
         try {
-            //Connect to the database
-            db.connect();
             //Create the query
             String query = "SELECT token FROM users WHERE username = ?";
             //Create a prepared statement with the query
@@ -101,11 +91,8 @@ public class AuthController {
             //Execute the query
             ResultSet rs = statement.executeQuery();
             //Get the token from the result set, or return null if it doesn't exist
-            String token = rs.next() ? rs.getString("token") : null;
-            //Close the connection
-            db.closeConnection();
             //Return the token
-            return token;
+            return rs.next() ? rs.getString("token") : null;
         } catch (SQLException e) {
             //Print the stack trace and return null if there was an exception
             e.printStackTrace();
@@ -116,8 +103,6 @@ public class AuthController {
     //Method to save a token to the database for a given user
     public void saveToken(String user, String jwtToken) {
         try {
-            //Connect to the database
-            db.connect();
             //Create the query
             String query = "UPDATE users SET token = ? WHERE username = ?";
             //Create a prepared statement with the query
@@ -126,8 +111,6 @@ public class AuthController {
             statement.setString(2, user);
             //Execute the update
             statement.executeUpdate();
-            //Close the connection
-            db.closeConnection();
         } catch (SQLException e) {
             //Print the stack trace if there was an exception
             e.printStackTrace();

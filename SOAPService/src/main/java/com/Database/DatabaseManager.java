@@ -1,45 +1,33 @@
 package com.Database;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DatabaseManager {
     private static DatabaseManager instance;
-    private final String host;
-    private final String user;
-    private final String password;
-    private final String database;
-    private Connection conn;
-    private Statement stmt;
+    private Connection connection;
+    private final String url = "jdbc:mysql://localhost:3306/trainbooking";
+    private final String username = "root";
+    private final String password = "root";
 
-    private DatabaseManager(String host, String user, String password, String database) {
-        this.host = host;
-        this.user = user;
-        this.password = password;
-        this.database = database;
+    private DatabaseManager() {
+        try {
+            this.connection = DriverManager.getConnection(url, username, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static DatabaseManager getInstance() {
         if (instance == null) {
-            instance = new DatabaseManager("localhost", "root", "root", "trainbooking");
+            instance = new DatabaseManager();
         }
         return instance;
     }
 
-    public void connect() throws SQLException {
-        conn = DriverManager.getConnection("jdbc:mysql://" + host + "/" + database + "?user=" + user + "&password=" + password);
-        stmt = conn.createStatement();
-    }
-
-    public ResultSet executeQuery(String query) throws SQLException {
-        return stmt.executeQuery(query);
-    }
-
-    public void closeConnection() throws SQLException {
-        stmt.close();
-        conn.close();
-    }
-
-    public Connection getConnection() {
-        return conn;
+    public Connection getConnection() throws SQLException {
+        this.connection = DriverManager.getConnection(url, username, password);
+        return this.connection;
     }
 }

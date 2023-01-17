@@ -18,14 +18,14 @@ public class SearchEndpoint {
     private final CompanyRESTApiConsumer consumingRestApplication;
 
     public SearchEndpoint() {
-        consumingRestApplication = new CompanyRESTApiConsumer();
-        consumingRestApplication.setUrl("http://localhost:3000/");
+        consumingRestApplication = CompanyRESTApiConsumer.getInstance();
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SearchRequest")
     @ResponsePayload
     public SearchResponse search(@RequestPayload SearchRequest request) {
 
+        // TODO : Check Token
         String jsonData = consumingRestApplication.searchTrain(request);
 
         SearchResponse.Train[] trains = new Gson().fromJson(jsonData, SearchResponse.Train[].class);

@@ -1,0 +1,22 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://trainbooking.fr/train-booking-soap-service" elementFormDefault="qualified">
+
+    <xs:element name="BookTicketRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="company" type="xs:string"/>
+                <xs:element name="idTrain" type="xs:string"/>
+                <xs:element name="class" type="xs:string"/>
+                <xs:element name="NBSeats" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="BookTicketResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="succeed" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

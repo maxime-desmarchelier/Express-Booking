@@ -18,7 +18,6 @@ public class HelloWorldEndpoint {
     @Autowired
     public HelloWorldEndpoint() {
         consumingRestApplication = new CompanyRESTApiConsumer();
-        consumingRestApplication.setUrl("http://localhost:3000/");
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getHelloWorldRequest")

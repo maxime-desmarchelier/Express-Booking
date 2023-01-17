@@ -1,5 +1,7 @@
 const express = require('express');
 const sequelize = require('./database');
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./swagger_output.json')
 
 // create an express app
 const app = express();
@@ -9,9 +11,10 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 // mount the routes for tests and search
-app.use('/tests', require('./routes/tests'));
-app.use('/search', require('./routes/search'));
-app.use('/booking', require('./routes/booking'));
+app.use('/', require('./routes/tests'));
+app.use('/', require('./routes/search'));
+app.use('/', require('./routes/booking'));
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 
 // import the trains model

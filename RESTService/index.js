@@ -2,6 +2,7 @@ const express = require('express');
 const sequelize = require('./database');
 const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger_output.json')
+const fakeData = require('./fakeData');
 
 // create an express app
 const app = express();
@@ -29,7 +30,9 @@ const Ticket = require('./models/ticket');
         // sync the database models
         sequelize.sync({force: true}).then(() => {
             console.log('Database synced');
+            fakeData.generateFakeData();
         });
+
 
         let port = 3000;
         if (process.env.EXTERNAL_PORT) {

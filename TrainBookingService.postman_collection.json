@@ -7,124 +7,470 @@
 	},
 	"item": [
 		{
-			"name": "Rest API HelloWorld",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:3000/tests/hello/toto",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"tests",
-						"hello",
-						"toto"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Rest API DB Connexion Test",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/tests/db",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"tests",
-						"db"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "SOAP API HelloWorld",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"content-type": true
-				}
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					},
-					{
-						"key": "SOAPAction",
-						"value": "#POST",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:gs=\"http://spring.io/guides/gs-producing-web-service\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <gs:getHelloWorldRequest>\n         <gs:name>Toto</gs:name>\n      </gs:getHelloWorldRequest>\n   </soapenv:Body>\n</soapenv:Envelope>",
-					"options": {
-						"raw": {
-							"language": "xml"
+			"name": "REST",
+			"item": [
+				{
+					"name": "Tests",
+					"item": [
+						{
+							"name": "Rest API HelloWorld",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/tests/hello/toto",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"tests",
+										"hello",
+										"toto"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rest API DB Connexion Test",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/tests/db",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"tests",
+										"db"
+									]
+								}
+							},
+							"response": []
 						}
-					}
+					]
 				},
-				"url": {
-					"raw": "http://localhost:8080/ws",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"ws"
+				{
+					"name": "Train",
+					"item": [
+						{
+							"name": "Rest API Search",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/search/train/FROM/Paris/To/Lyon/On/2023-01-16/Class/First",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"search",
+										"train",
+										"FROM",
+										"Paris",
+										"To",
+										"Lyon",
+										"On",
+										"2023-01-16",
+										"Class",
+										"First"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rest API Book",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/booking/VnwpL/CLASS/First/SEATS/5",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"booking",
+										"VnwpL",
+										"CLASS",
+										"First",
+										"SEATS",
+										"5"
+									]
+								}
+							},
+							"response": []
+						}
 					]
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "SOAP API tests.wsdl",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"content-type": true
-				}
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					},
-					{
-						"key": "SOAPAction",
-						"value": "#POST",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/ws/tests.wsdl",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"ws",
-						"tests.wsdl"
+			"name": "SOAP",
+			"item": [
+				{
+					"name": "Tests",
+					"item": [
+						{
+							"name": "SOAP API HelloWorld",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "#POST",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:gs=\"https://trainbooking.fr/train-booking-soap-service\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <gs:getHelloWorldRequest>\n         <gs:name>Toto</gs:name>\n      </gs:getHelloWorldRequest>\n   </soapenv:Body>\n</soapenv:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/ws",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"ws"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SOAP API tests.wsdl",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "#POST",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/ws/tests.wsdl",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"ws",
+										"tests.wsdl"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "SOAP API Auth",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "#POST",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:gs=\"https://trainbooking.fr/train-booking-soap-service\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <gs:AuthRequest>\n         <gs:username>admin</gs:username>\n         <gs:password>admin</gs:password>\n      </gs:AuthRequest>\n   </soapenv:Body>\n</soapenv:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/ws",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"ws"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SOAP API CreateUser",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "#POST",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:gs=\"https://trainbooking.fr/train-booking-soap-service\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <gs:AuthCreateRequest>\n         <gs:username>admfddsqhgfdssin</gs:username>\n         <gs:password>afdsdqdmhgdsqfin</gs:password>\n         <gs:token>eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY3Mzk5MDY1N30.BML0dxU9vAWknrnx7IO0nAQ0QF9nf8229nYpohqhbLo</gs:token>\n      </gs:AuthCreateRequest>\n   </soapenv:Body>\n</soapenv:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/ws",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"ws"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SOAP API CheckTokenValidity",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "#POST",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:gs=\"https://trainbooking.fr/train-booking-soap-service\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <gs:CheckTokenValidityRequest>\n         <gs:token>eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY3Mzk5MDY1N30.BML0dxU9vAWknrnx7IO0nAQ0QF9nf8229nYpohqhbLo</gs:token>\n      </gs:CheckTokenValidityRequest>\n   </soapenv:Body>\n</soapenv:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/ws",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"ws"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Train",
+					"item": [
+						{
+							"name": "SOAP API SearchTrain",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "#POST",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:gs=\"https://trainbooking.fr/train-booking-soap-service\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <gs:SearchRequest>\n         <gs:from>Lille</gs:from>\n      </gs:SearchRequest>\n   </soapenv:Body>\n</soapenv:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/ws",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"ws"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SOAP API Booking",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "#POST",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:gs=\"https://trainbooking.fr/train-booking-soap-service\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <gs:BookTicketRequest>\n         <gs:company>SNCF</gs:company>\n         <gs:idTrain>uvo6n</gs:idTrain>\n         <gs:class>First</gs:class>\n         <gs:NBSeats>1</gs:NBSeats>\n         <gs:token>eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY3Mzk5MDY1N30.BML0dxU9vAWknrnx7IO0nAQ0QF9nf8229nYpohqhbLo</gs:token>\n      </gs:BookTicketRequest>\n   </soapenv:Body>\n</soapenv:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/ws",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"ws"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SOAP API train.wsdl",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								},
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "#POST",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/ws/train.wsdl",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"ws",
+										"train.wsdl"
+									]
+								}
+							},
+							"response": []
+						}
 					]
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }

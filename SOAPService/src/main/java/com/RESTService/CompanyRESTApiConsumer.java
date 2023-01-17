@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 public class CompanyRESTApiConsumer {
 
     private static CompanyRESTApiConsumer instance;
-    private final String url = "http://localhost:3000/";
+    private final String url = System.getenv("REST_ENDPOINT");
 
     public static CompanyRESTApiConsumer getInstance() {
         if (instance == null) {

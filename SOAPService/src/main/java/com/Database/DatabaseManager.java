@@ -6,10 +6,10 @@ import java.sql.SQLException;
 
 public class DatabaseManager {
     private static DatabaseManager instance;
+    private final String url = System.getenv("MYSQL_HOST");
+    private final String username = System.getenv("MYSQL_USER");
+    private final String password = System.getenv("MYSQL_PASSWORD");
     private Connection connection;
-    private final String url = "jdbc:mysql://localhost:3306/trainbooking";
-    private final String username = "root";
-    private final String password = "root";
 
     private DatabaseManager() {
         try {

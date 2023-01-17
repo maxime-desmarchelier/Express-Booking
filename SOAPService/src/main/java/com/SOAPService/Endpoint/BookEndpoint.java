@@ -24,10 +24,14 @@ public class BookEndpoint {
     public BookTicketResponse bookTicket(@RequestPayload BookTicketRequest request) {
         String company = request.getCompany();
         String idTrain = request.getIdTrain();
+        String clazz = request.getClazz();
+        String token = request.getToken();
         int NBSeats = request.getNBSeats();
 
         BookTicketResponse response = new BookTicketResponse();
         BookingController bookController = new BookingController();
+
+        bookController.createReservation(idTrain, clazz, NBSeats, 0, token);
 
         consumingRestApplication.bookTrain(request);
 

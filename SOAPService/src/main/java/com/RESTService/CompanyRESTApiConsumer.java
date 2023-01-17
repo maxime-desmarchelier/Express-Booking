@@ -4,6 +4,8 @@ import com.RESTService.Object.HelloObject;
 import https.trainbooking_fr.train_booking_soap_service.BookTicketRequest;
 import https.trainbooking_fr.train_booking_soap_service.SearchRequest;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
@@ -47,9 +49,9 @@ public class CompanyRESTApiConsumer {
         return new RestTemplate().getForObject(requestUrl, String.class);
     }
 
-    public void bookTrain(BookTicketRequest request) {
+    public String bookTrain(BookTicketRequest request) {
         String requestUrl = url + "booking/" + request.getIdTrain() + "/CLASS/" + request.getClazz() + "/SEATS/" + request.getNBSeats();
-        RestTemplate template = new RestTemplate();
-        template.put(requestUrl, "");
+        HttpEntity<BookTicketRequest> requestEntity = new HttpEntity<>(request);
+        return new RestTemplate().exchange(requestUrl, HttpMethod.PUT, requestEntity, String.class).getBody();
     }
 }

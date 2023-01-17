@@ -8,6 +8,7 @@
                 <xs:element name="idTrain" type="xs:string"/>
                 <xs:element name="class" type="xs:string"/>
                 <xs:element name="NBSeats" type="xs:int"/>
+                <xs:element name="token" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

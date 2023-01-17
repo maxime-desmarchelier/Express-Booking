@@ -92,7 +92,7 @@ public class AuthEndpoint {
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "CheckTokenValidityRequest")
     @ResponsePayload
-    public CheckTokenValidityResponse createUser(@RequestPayload CheckTokenValidityRequest request) {
+    public CheckTokenValidityResponse checkTokenValidity(@RequestPayload CheckTokenValidityRequest request) {
         String token = request.getToken();
 
         CheckTokenValidityResponse response = new CheckTokenValidityResponse();

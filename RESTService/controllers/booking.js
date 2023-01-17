@@ -13,26 +13,26 @@ exports.updateSeats = async (req, res) => {
         where: {
             idTrain: req.params.id
         }, include: [{
-            model: Classes,
-            as: 'classes',
-            where: {
-                name: req.params.class,
-                availableSeats: {
+            model: Classes, as: 'classes', where: {
+                name: req.params.class, availableSeats: {
                     [Op.gte]: req.params.seats
                 }
             }
         }]
     }).then(train => {
         if (train) {
-            Classes.update({
-                availableSeats: Sequelize.literal(`availableSeats - ${req.params.seats}`)
-            }, {
+            Classes.findOne({
                 where: {
-                    name: req.params.class,
-                    trainId: train.id
+                    name: req.params.class, trainId: train.id
                 }
-            }).then(() => {
-                res.status(200).send('Update successful');
+            }).then((classe) => {
+                if (classe) {
+                    classe.availableSeats = classe.availableSeats - req.params.seats;
+                    classe.save();
+                    res.status(200).send('Seats updated');
+                } else {
+                    res.status(404).send('Class not found');
+                }
             });
         } else {
             res.status(404).send('Train not found or not enough available seats');

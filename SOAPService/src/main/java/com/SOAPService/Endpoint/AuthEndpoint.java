@@ -20,7 +20,7 @@ public class AuthEndpoint {
 
     private static final String NAMESPACE_URI = "https://trainbooking.fr/train-booking-soap-service";
 
-    public boolean checkTokenValidity(String token) {
+    public static boolean checkTokenValidity(String token) {
         try {
             byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary("XN}Ga@!E?4FQ(Em\"c4NzZ32a<|O<fMXN}Ga@!E?4FQ(Em\"c4NzZ32a<|O<fMXN}Ga@!E?4FQ(Em\"c4NzZ32a<|O<fM");
             SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;

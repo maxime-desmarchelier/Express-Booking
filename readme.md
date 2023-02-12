@@ -1,6 +1,9 @@
 <!-- PROJECT LOGO -->
 <br />
 <div>
+  <p align="center">
+    <img src="images/logo.png" alt="Logo" width="256" height="256">
+  </p>
   <h3 align="center">Express-Booking : Web-Services Project</h3>
 </div>
 
@@ -77,7 +80,7 @@ http://localhost:8080/ws/train.wsdl
 http://localhost:8080/ws/auth.wsdl
 ```
 
-## Qu'est ce que j'ai appris ?
+## What I have learned
 
 Docker is a very powerful tool that enables the creation of development environments quickly. It creates containers,
 which are isolated development environments from each other, eliminating the need to manually install dependencies for

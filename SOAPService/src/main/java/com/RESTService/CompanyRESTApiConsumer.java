@@ -35,7 +35,7 @@ public class CompanyRESTApiConsumer {
             if (request.getTo() != null && !request.getTo().isEmpty()) {
                 requestUrl += "TO/" + request.getTo() + "/";
                 if (request.getDate() != null && !request.getDate().isEmpty()) {
-                    requestUrl += "DATE/" + request.getDate() + "/";
+                    requestUrl += "ON/" + request.getDate() + "/";
                     if (request.getClazz() != null && !request.getClazz().isEmpty()) {
                         requestUrl += "CLASS/" + request.getClazz() + "/";
                         if (request.getMinseats() != -1) {

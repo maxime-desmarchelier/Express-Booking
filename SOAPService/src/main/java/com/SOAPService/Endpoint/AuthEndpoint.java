@@ -74,18 +74,11 @@ public class AuthEndpoint {
     public AuthCreateResponse createUser(@RequestPayload AuthCreateRequest request) {
         String user = request.getUsername();
         String pass = request.getPassword();
-        String token = request.getToken();
-
-        boolean success = false;
 
         AuthCreateResponse response = new AuthCreateResponse();
         AuthController authController = new AuthController();
 
-        if (checkTokenValidity(token)) {
-            success = authController.createUser(user, pass);
-        }
-
-        response.setSucceed(success);
+        response.setSucceed(authController.createUser(user, pass));
 
         return response;
     }
